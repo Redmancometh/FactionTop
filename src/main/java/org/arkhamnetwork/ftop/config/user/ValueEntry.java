@@ -1,4 +1,4 @@
-package org.arkhamnetwork.ftop.data;
+package org.arkhamnetwork.ftop.config.user;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

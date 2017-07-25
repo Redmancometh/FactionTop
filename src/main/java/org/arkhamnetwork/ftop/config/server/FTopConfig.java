@@ -2,7 +2,6 @@ package org.arkhamnetwork.ftop.config.server;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.arkhamnetwork.ftop.data.FactionEntry;
 
 import java.util.List;
 
