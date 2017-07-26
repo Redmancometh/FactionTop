@@ -6,15 +6,19 @@ import com.massivecraft.factions.Faction;
 import com.massivecraft.factions.Factions;
 import lombok.Getter;
 import org.arkhamnetwork.ftop.FactionTop;
+import org.bukkit.Bukkit;
 import org.bukkit.block.Chest;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitTask;
 
 public class ChestCheckJob implements Runnable {
 
     private ChunkCheckJob master;
 
     private Chest chest;
+
+    private BukkitTask task;
 
     @Getter
     private int total = 0;
