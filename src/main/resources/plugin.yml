@@ -1,0 +1,9 @@
+name: FactonTop
+main: org.arkhamnetwork.ftop.FactionTop
+version: 1.0
+description: Faction top
+commands:
+  pedestal:
+permissions:
+  ftop.pedestal:
+    description: Basic Permission.

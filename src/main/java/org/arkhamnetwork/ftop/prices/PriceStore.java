@@ -1,8 +1,7 @@
 package org.arkhamnetwork.ftop.prices;
 
+import org.arkhamnetwork.ftop.FactionTop;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 
@@ -12,6 +11,10 @@ public class PriceStore {
 
     public PriceStore() {
         this.itemPriceStore = new HashMap<>();
+
+        FactionTop.getPriceConfig().getPrices().forEach(entry -> {
+            itemPriceStore.putIfAbsent(entry.getMaterial(), entry.getValue());
+        });
     }
 
     public Integer getPrice(Material item) {

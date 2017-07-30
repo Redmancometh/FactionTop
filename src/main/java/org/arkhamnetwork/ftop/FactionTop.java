@@ -3,8 +3,9 @@ package org.arkhamnetwork.ftop;
 import com.redmancometh.redcore.RedPlugin;
 import com.redmancometh.redcore.config.ConfigManager;
 import com.redmancometh.redcore.mediators.ObjectManager;
-import org.arkhamnetwork.ftop.config.server.FTopConfig;
+import org.arkhamnetwork.ftop.config.server.PedestalConfig;
 import org.arkhamnetwork.ftop.config.user.FTopPriceConfig;
+import org.arkhamnetwork.ftop.pedestal.PedestalCommand;
 import org.arkhamnetwork.ftop.prices.PriceStore;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -33,7 +34,7 @@ public class FactionTop extends JavaPlugin implements RedPlugin {
     /*
         Server Config
      */
-    private ConfigManager<FTopConfig> topConfigManager;
+    private ConfigManager<PedestalConfig> pedestalConfigManager;
 
 
 
@@ -42,18 +43,20 @@ public class FactionTop extends JavaPlugin implements RedPlugin {
 
     public void onEnable() {
         this.priceConfigManager = new ConfigManager("prices.json", FTopPriceConfig.class);
-        this.topConfigManager = new ConfigManager<>("factions.json", FTopConfig.class);
+        this.pedestalConfigManager = new ConfigManager<>("pedestals.json", PedestalConfig.class);
 
         this.factionManager = new FactionManager();
 
         priceConfigManager.init(this);
-        topConfigManager.init(this);
+        pedestalConfigManager.init(this);
 
         this.enable();
 
         //LOAD TO PRICE STORE
 
         priceStore = new PriceStore();
+
+        getCommand("pedestal").setExecutor(new PedestalCommand());
     }
 
     @Override
@@ -65,7 +68,7 @@ public class FactionTop extends JavaPlugin implements RedPlugin {
     public void reloadConfig() {
 
         priceConfigManager.init(this);
-        topConfigManager.init(this);
+        pedestalConfigManager.init(this);
     }
 
     public SessionFactory getFactory() {
@@ -88,8 +91,8 @@ public class FactionTop extends JavaPlugin implements RedPlugin {
         return getInstance().getPriceConfigManager().getCurrentConfig();
     }
 
-    public static FTopConfig getTopConfig() {
-        return getInstance().getTopConfigManager().getCurrentConfig();
+    public static PedestalConfig getPedestalConfig() {
+        return getInstance().getPedestalConfigManager().getCurrentConfig();
     }
 
 
@@ -134,8 +137,8 @@ public class FactionTop extends JavaPlugin implements RedPlugin {
         return priceConfigManager;
     }
 
-    public ConfigManager<FTopConfig> getTopConfigManager() {
-        return topConfigManager;
+    public ConfigManager<PedestalConfig> getPedestalConfigManager() {
+        return pedestalConfigManager;
     }
 
     public PriceStore getPriceStore() {
