@@ -28,7 +28,7 @@ public class ChunkCheckJob implements Runnable {
 
     public ChunkCheckJob(FactionTop owner) {
         this.owner = owner;
-        this.task = Bukkit.getScheduler().runTaskTimer(owner.getBukkitPlugin(), this, 0L, 60*20L);
+        this.task = Bukkit.getScheduler().runTaskTimer(owner.getBukkitPlugin(), this, 0L, 60 * 20L);
     }
 
     @Override
@@ -38,8 +38,12 @@ public class ChunkCheckJob implements Runnable {
 
         World world = owner.getBukkitPlugin().getServer().getWorld(worldName);
 
-        toCheck = Arrays.asList(world.getLoadedChunks().clone());
+        if (!toCheck.isEmpty()) {
 
+        } else {
+            toCheck = Arrays.asList(world.getLoadedChunks().clone());
+        }
+        
         if (chunkCount < maxCount) {
 
             Chunk current = toCheck.get(chunkCount);
@@ -60,8 +64,7 @@ public class ChunkCheckJob implements Runnable {
 
                     //Chest job only needs to run once, then it is done.
                     chestJob.run();
-                }
-                else {
+                } else {
 
                     Faction facAt = Board.getInstance().getFactionAt(new FLocation(state.getLocation()));
 

@@ -5,6 +5,8 @@ import com.redmancometh.redcore.config.ConfigManager;
 import com.redmancometh.redcore.mediators.ObjectManager;
 import org.arkhamnetwork.ftop.config.server.PedestalConfig;
 import org.arkhamnetwork.ftop.config.user.FTopPriceConfig;
+import org.arkhamnetwork.ftop.jobs.ChunkCheckJob;
+import org.arkhamnetwork.ftop.jobs.UpdatePedestalJob;
 import org.arkhamnetwork.ftop.pedestal.PedestalCommand;
 import org.arkhamnetwork.ftop.prices.PriceStore;
 import org.bukkit.Bukkit;
@@ -37,6 +39,13 @@ public class FactionTop extends JavaPlugin implements RedPlugin {
     private ConfigManager<PedestalConfig> pedestalConfigManager;
 
 
+    /*
+        Jobs
+     */
+
+    private ChunkCheckJob chunkCheckJob;
+    private UpdatePedestalJob updatePedestalJob;
+
 
     private PriceStore priceStore;
 
@@ -52,9 +61,9 @@ public class FactionTop extends JavaPlugin implements RedPlugin {
 
         this.enable();
 
-        //LOAD TO PRICE STORE
-
         priceStore = new PriceStore();
+
+        chunkCheckJob = new ChunkCheckJob(this);
 
         getCommand("pedestal").setExecutor(new PedestalCommand());
     }
