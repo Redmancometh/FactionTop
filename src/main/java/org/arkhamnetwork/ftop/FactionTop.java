@@ -3,6 +3,7 @@ package org.arkhamnetwork.ftop;
 import com.redmancometh.redcore.RedPlugin;
 import com.redmancometh.redcore.config.ConfigManager;
 import com.redmancometh.redcore.mediators.ObjectManager;
+import lombok.Getter;
 import org.arkhamnetwork.ftop.config.server.PedestalConfig;
 import org.arkhamnetwork.ftop.config.user.FTopPriceConfig;
 import org.arkhamnetwork.ftop.jobs.ChunkCheckJob;
@@ -42,8 +43,10 @@ public class FactionTop extends JavaPlugin implements RedPlugin {
     /*
         Jobs
      */
-
+    @Getter
     private ChunkCheckJob chunkCheckJob;
+
+    @Getter
     private UpdatePedestalJob updatePedestalJob;
 
 

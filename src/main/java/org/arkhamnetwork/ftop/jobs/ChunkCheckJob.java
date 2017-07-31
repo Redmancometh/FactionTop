@@ -3,6 +3,7 @@ package org.arkhamnetwork.ftop.jobs;
 import com.massivecraft.factions.Board;
 import com.massivecraft.factions.FLocation;
 import com.massivecraft.factions.Faction;
+import lombok.Getter;
 import org.arkhamnetwork.ftop.FactionTop;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
@@ -24,6 +25,7 @@ public class ChunkCheckJob implements Runnable {
 
     private BukkitTask task;
 
+    @Getter
     private Map<String, Integer> factionTotals = new HashMap<>();
 
     public ChunkCheckJob(FactionTop owner) {
@@ -43,7 +45,7 @@ public class ChunkCheckJob implements Runnable {
         } else {
             toCheck = Arrays.asList(world.getLoadedChunks().clone());
         }
-        
+
         if (chunkCount < maxCount) {
 
             Chunk current = toCheck.get(chunkCount);
