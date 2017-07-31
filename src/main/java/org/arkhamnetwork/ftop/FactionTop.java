@@ -67,6 +67,7 @@ public class FactionTop extends JavaPlugin implements RedPlugin {
         priceStore = new PriceStore();
 
         chunkCheckJob = new ChunkCheckJob(this);
+        updatePedestalJob = new UpdatePedestalJob(this);
 
         getCommand("pedestal").setExecutor(new PedestalCommand());
     }

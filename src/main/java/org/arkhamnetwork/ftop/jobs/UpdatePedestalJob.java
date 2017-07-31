@@ -1,7 +1,9 @@
 package org.arkhamnetwork.ftop.jobs;
 
+import com.massivecraft.factions.Factions;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
+import net.citizensnpcs.npc.skin.SkinnableEntity;
 import org.arkhamnetwork.ftop.FactionTop;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
@@ -44,8 +46,10 @@ public class UpdatePedestalJob implements Runnable {
 
             Location loc = owner.getPedestalConfigManager().getCurrentConfig().getPedestals().get(i).toLocation();
 
-            NPC npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.SKELETON, "Top #" + i);
+            NPC npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Top #" + i);
 
+            SkinnableEntity skinnableEntity = (SkinnableEntity) npc.getEntity();
+            skinnableEntity.setSkinName(Factions.getInstance().getFactionById((String) top.keySet().toArray()[i]).getFPlayerAdmin().getName());
             npc.spawn(loc); //TODO just update names maybe ? and remove old entities
         }
     }
